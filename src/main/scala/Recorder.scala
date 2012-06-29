@@ -4,21 +4,20 @@ import collection.mutable
 
 class Recorder {
 
-
   private var failedLogins: mutable.HashMap[String, List[Long]] = new mutable.HashMap[String, List[Long]]()
 
   def recordLogin( ip : String, date: Long) = {
-    if (failedLogins.contains(ip)) {
+    if (ipHasAlreadyFailed(ip)) {
       addTheNewFailedLoginToTheExistingOnes(ip, date)
-
     } else {
       insertFailedLoginIntoMap(ip, date)
-
     }
-
-
   }
 
+
+  private def ipHasAlreadyFailed(ip: String): Boolean = {
+    failedLogins.contains(ip)
+  }
 
   private def insertFailedLoginIntoMap(ip: String, date: Long)= {
     failedLogins += (ip -> List(date))
