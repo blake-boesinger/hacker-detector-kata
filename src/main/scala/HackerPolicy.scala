@@ -11,8 +11,8 @@ class HackerPolicy {
     }
 
     if (numberOfFailedLogins >= 5) {
-      val fiveMinutes: Int = 300000
-      if (timeBetweenFirstAndCurrentLogin <= fiveMinutes) {
+      val timeInMillis: Int = 5 * 60 *1000
+      if (timeBetweenFirstAndCurrentLogin <= timeInMillis) {
         return true
       }
     }

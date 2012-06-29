@@ -10,7 +10,7 @@ class Recorder {
     if (ipHasAlreadyFailed(ip)) {
       addTheNewFailedLoginToTheExistingOnes(ip, date)
     } else {
-      insertFailedLoginIntoMap(ip, date)
+      insertFailedLogin(ip, date)
     }
   }
 
@@ -19,7 +19,7 @@ class Recorder {
     failedLogins.contains(ip)
   }
 
-  private def insertFailedLoginIntoMap(ip: String, date: Long)= {
+  private def insertFailedLogin(ip: String, date: Long)= {
     failedLogins += (ip -> List(date))
   }
 
@@ -34,13 +34,11 @@ class Recorder {
 
     val isHacker  = hackerPolicy.isHacker(numberOfFailedLogins  , timeOfFirstFailedLogin, date )
 
-    if (isHacker)
+    if (isHacker)  {
+      failedLogins.remove(ip) // assume that once we have reported that ip, we do not need to report it again, unless there is a future occurence that violates the policy
       return ip
+    }
     else
       return null
-
-
-
   }
-
 }

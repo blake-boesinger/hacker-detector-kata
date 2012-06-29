@@ -7,7 +7,6 @@ import org.junit._
 
 class HackerDetectorTest {
 
-
   var detector : HackerDetector= null
 
   @Before
@@ -15,9 +14,6 @@ class HackerDetectorTest {
     detector =    new InMemoryHackerDetector(new LineParser, new Recorder, new HackerPolicy)
 
   }
-
-
-
 
   @Test
   def test {
@@ -32,9 +28,8 @@ class HackerDetectorTest {
     detector.parseLine("80.238.9.179,133612949,SIGNIN_FAILURE,Dave.Branning")
     detector.parseLine("80.238.9.179,133612950,SIGNIN_FAILURE,Dave.Branning")
     detector.parseLine("80.238.9.179,133612951,SIGNIN_FAILURE,Dave.Branning")
-    detector.parseLine("80.238.9.179,133612952,SIGNIN_FAILURE,Dave.Branning")
 
-    org.junit.Assert.assertEquals( "80.238.9.179", detector.parseLine("80.238.9.179,133612953,SIGNIN_FAILURE,Dave.Branning"))
+    org.junit.Assert.assertEquals( "80.238.9.179", detector.parseLine("80.238.9.179,133612952,SIGNIN_FAILURE,Dave.Branning"))
 
   }
 

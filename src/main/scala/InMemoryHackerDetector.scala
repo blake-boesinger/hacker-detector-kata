@@ -3,9 +3,6 @@ package com.detector
 
 class InMemoryHackerDetector(lineParser: LineParser, recorder: Recorder, hackerPolicy : HackerPolicy) extends HackerDetector {
 
-
-
-
   override def parseLine(line: String): String = {
 
     val parsedLine: Line = lineParser.parseLine(line)
