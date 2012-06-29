@@ -5,14 +5,14 @@ import collection.mutable
 class Recorder {
 
 
-  var failedLogins: mutable.HashMap[String, List[Long]] = new mutable.HashMap[String, List[Long]]()
+  private var failedLogins: mutable.HashMap[String, List[Long]] = new mutable.HashMap[String, List[Long]]()
 
   def recordLogin( ip : String, date: Long) = {
     if (failedLogins.contains(ip)) {
-      addTheNewFailedLogin(ip, date)
+      addTheNewFailedLoginToTheExistingOnes(ip, date)
 
     } else {
-      failedLogins += (ip -> List(date))
+      insertFailedLoginIntoMap(ip, date)
 
     }
 
@@ -20,7 +20,11 @@ class Recorder {
   }
 
 
-  def addTheNewFailedLogin(ip: String, date: Long) = {
+  private def insertFailedLoginIntoMap(ip: String, date: Long)= {
+    failedLogins += (ip -> List(date))
+  }
+
+  private def addTheNewFailedLoginToTheExistingOnes(ip: String, date: Long) = {
     failedLogins += (ip -> (failedLogins.get(ip).get ::: List(date)))
   }
 
