@@ -1,6 +1,6 @@
-package com.sky.detector
+package com.detector
 
-import com.sky.detector.Line
+import com.detector.Line
 import org.junit._
 
 

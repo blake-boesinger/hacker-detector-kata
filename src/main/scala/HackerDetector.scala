@@ -1,5 +1,5 @@
 
-package com.sky.detector
+package com.detector
 
 
 

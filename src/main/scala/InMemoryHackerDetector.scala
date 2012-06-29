@@ -1,50 +1,45 @@
-package com.sky.detector
-
-import collection.mutable
+package com.detector
 
 
+class InMemoryHackerDetector(lineParser: LineParser, recorder: Recorder) extends HackerDetector {
 
-class InMemoryHackerDetector(lineParser : LineParser) extends HackerDetector {
+
+  def isHackerPolicy(numberOfFailedLogins: Int, timeOfFirstFailedLogin: Long, timeOfCurrentLogin : Long): Boolean = {
+          if (numberOfFailedLogins >= 5) {
+            if (timeOfCurrentLogin - timeOfFirstFailedLogin <= 300000) {
+              return true
+            }
+          }
+          return false
+
+        }
 
 
-  var failedLogins : mutable.HashMap[String, List[Long]] = new mutable.HashMap[String,List[Long]]()
+  override def parseLine(line: String): String = {
 
-  override def parseLine(line : String) : String = {
-
-            val  parsedLine : Line =     lineParser.parseLine(line)
+    val parsedLine: Line = lineParser.parseLine(line)
 
     parsedLine match {
-      case Line(ip, date , "SIGNIN_FAILURE", username) => {
-        if ( failedLogins.contains(ip))    {
-          val existing : List[Long] =    failedLogins.get(ip).get
-          val newOne = List(date)
-            failedLogins += (ip -> (existing ::: newOne)   )
+      case Line(ip, date, "SIGNIN_FAILURE", username) => {
 
-        } else {
-          failedLogins += (ip -> List(date))
 
-        }
+        recorder.recordLogin(ip, date)
 
 
 
-        if ( failedLogins.get(ip).get.size >= 5) {
-         val firstLoginAttempt  = failedLogins.get(ip).get.head
-          if ( date - firstLoginAttempt <= 300000) {
-                return ip
-          }
-        }
-        // I usually avoid returning nulls, favouring "Tell, Don't Ask", "Null Object Pattern" or an Option or Maybe
-        return null
+
+
+
+
+        val hackerIpOrNull: String = recorder.ipOfHackerOrNull(ip, date, isHackerPolicy)
+        return hackerIpOrNull
 
 
       }
+
+
       case _ => null
     }
-
-
-
-
-
 
 
   }
