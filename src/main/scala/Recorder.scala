@@ -7,7 +7,7 @@ class Recorder {
   private var failedLogins: mutable.HashMap[String, List[Long]] = new mutable.HashMap[String, List[Long]]()
 
   def recordLogin( ip : String, date: Long) = {
-    if (ipHasAlreadyFailed(ip)) {
+    if (ipHasFailedPreviously(ip)) {
       addTheNewFailedLoginToTheExistingOnes(ip, date)
     } else {
       insertFailedLogin(ip, date)
@@ -15,7 +15,7 @@ class Recorder {
   }
 
 
-  private def ipHasAlreadyFailed(ip: String): Boolean = {
+  private def ipHasFailedPreviously(ip: String): Boolean = {
     failedLogins.contains(ip)
   }
 
@@ -29,16 +29,27 @@ class Recorder {
 
   def ipOfHackerOrNull(ip : String, date : Long, hackerPolicy : HackerPolicy) : String = {
 
-    val numberOfFailedLogins: Int = failedLogins.get(ip).get.size
-    val timeOfFirstFailedLogin: Long = failedLogins.get(ip).get.head
-
-    val isHacker  = hackerPolicy.isHacker(numberOfFailedLogins  , timeOfFirstFailedLogin, date )
+    val isHacker  = hackerPolicy.isHacker(numberOfFailedLogins(ip), timeOfFirstFailedLogin(ip), date )
 
     if (isHacker)  {
-      failedLogins.remove(ip) // assume that once we have reported that ip, we do not need to report it again, unless there is a future occurence that violates the policy
+       // assume that once we have reported that ip, we do not need to report it again, unless there is a future occurence that violates the policy
+      removeRecordsOf(ip)
       return ip
     }
     else
       return null
+  }
+
+
+  private def removeRecordsOf(ip: String) {
+    failedLogins.remove(ip)
+  }
+
+  private def timeOfFirstFailedLogin(ip: String): Long = {
+    failedLogins.get(ip).get.head
+  }
+
+  private def numberOfFailedLogins(ip: String): Int = {
+    failedLogins.get(ip).get.size
   }
 }

@@ -8,12 +8,12 @@ class LineParser {
 
 
   def parseLine( line : String) : Line  = {
-    val Array(one, two, three, four) = line.split(",")
+    val Array(ip, time, action, username) = line.split(",")
 
-    val tuple = (one, two, three, four)
+    val tuple = (ip, time, action, username)
 
     tuple match {
-     case Tuple4(a:String, b:String, c:String,d:String) => Line(a,b.toLong,c,d)
+     case Tuple4(ip:String, time:String, action:String,username:String) => Line(ip,time.toLong,action,username)
     }
 
 
