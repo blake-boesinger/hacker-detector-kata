@@ -12,7 +12,7 @@ class HackerDetectorTest {
 
   @Before
   def setup = {
-    detector =    new InMemoryHackerDetector(new LineParser, new Recorder)
+    detector =    new InMemoryHackerDetector(new LineParser, new Recorder, new HackerPolicy)
 
   }
 
