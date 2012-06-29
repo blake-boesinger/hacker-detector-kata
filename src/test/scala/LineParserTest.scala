@@ -1,6 +1,5 @@
 package com.detector
 
-import com.detector.Line
 import org.junit._
 
 
