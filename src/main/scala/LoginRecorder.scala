@@ -15,18 +15,6 @@ class LoginRecorder {
   }
 
 
-  private def ipHasFailedPreviously(ip: IpAddress): Boolean = {
-    failedLogins.contains(ip)
-  }
-
-  private def insertFailedLogin(ip: IpAddress, date: Date)= {
-    failedLogins += (ip -> List(date))
-  }
-
-  private def addTheNewFailedLoginToTheExistingOnes(ip: IpAddress, date: Date) = {
-    failedLogins += (ip -> (failedLogins.get(ip).get ::: List(date)))
-  }
-
   def ipOfHackerOrNull(ip : IpAddress, date : Date, hackerPolicy : HackerPolicy) : IpAddress = {
 
     val isHacker  = hackerPolicy.isHacker(numberOfFailedLogins(ip), timeOfFirstFailedLogin(ip), date )
@@ -40,6 +28,18 @@ class LoginRecorder {
       return null
   }
 
+
+  private def ipHasFailedPreviously(ip: IpAddress): Boolean = {
+    failedLogins.contains(ip)
+  }
+
+  private def insertFailedLogin(ip: IpAddress, date: Date)= {
+    failedLogins += (ip -> List(date))
+  }
+
+  private def addTheNewFailedLoginToTheExistingOnes(ip: IpAddress, date: Date) = {
+    failedLogins += (ip -> (failedLogins.get(ip).get ::: List(date)))
+  }
 
   private def removeRecordsOf(ip: IpAddress) {
     failedLogins.remove(ip)
