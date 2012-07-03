@@ -13,7 +13,7 @@ class LineParser {
     val tuple = (ip, time, action, username)
 
     tuple match {
-     case Tuple4(ip:String, time:String, action:String,username:String) => Line(ip,time.toLong,action,username)
+     case Tuple4(ip:String, date:String, action:String,username:String) => Line(new IpAddress(ip), new Date(date.toLong),new Action(action),new Username(username))
     }
 
 

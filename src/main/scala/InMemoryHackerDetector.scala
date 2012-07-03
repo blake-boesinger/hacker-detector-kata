@@ -13,12 +13,17 @@ class InMemoryHackerDetector(lineParser: LineParser, recorder: LoginRecorder, ha
     val parsedLine: Line = lineParser.parseLine(line)
 
     parsedLine match {
-      case Line(ip, date, "SIGNIN_FAILURE", username) => {
+      case Line(ip, date, Action("SIGNIN_FAILURE"), username) => {
 
         recorder.recordLogin(ip, date)
 
-        val hackerIpOrNull: String = recorder.ipOfHackerOrNull(ip, date, hackerPolicy)
-        return hackerIpOrNull
+        val hackerIpOrNull: IpAddress = recorder.ipOfHackerOrNull(ip, date, hackerPolicy)
+
+        if ( hackerIpOrNull == null) {
+          return null
+        }
+
+        return hackerIpOrNull.address
 
 
       }

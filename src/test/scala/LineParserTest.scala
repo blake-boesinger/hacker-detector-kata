@@ -14,7 +14,7 @@ class LineParserTest {
 
     val parsed = parser.parseLine ("80.238.9.179,133612947,SIGNIN_SUCCESS,Dave.Branning")
 
-    assertEquals( Line("80.238.9.179", 133612947, "SIGNIN_SUCCESS" , "Dave.Branning"  ) , parsed)
+    assertEquals( Line(IpAddress("80.238.9.179"), Date(133612947), Action("SIGNIN_SUCCESS") , Username("Dave.Branning")  ) , parsed)
 
 
 
