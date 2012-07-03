@@ -13,13 +13,13 @@ class InMemoryHackerDetector(lineParser: LineParser, recorder: LoginRecorder, ha
 
         recorder.recordLogin(ip, date)
 
-        val hackerIpOrNull: IpAddress = recorder.ipOfHackerOrNull(ip, date, hackerPolicy)
+        val ipOfHackerOrNull: IpAddress = recorder.ipOfHackerOrNull(ip, date, hackerPolicy)
 
-        if ( hackerIpOrNull == null) {
+        if ( ipOfHackerOrNull == null) {
           return null
         }
 
-        return hackerIpOrNull.address
+        return ipOfHackerOrNull.address
 
 
       }
