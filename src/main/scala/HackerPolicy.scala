@@ -6,7 +6,7 @@ class HackerPolicy {
   //     Strategy / Policy pattern
   def isHacker(numberOfFailedLogins: Int, dateOfFirstFailedLogin: Date, dateOfCurrentLogin: Date): Boolean = {
 
-    def timeBetweenFirstAndCurrentLogin: Long = {
+     def timeBetweenFirstAndCurrentLogin: Long = {
       dateOfCurrentLogin.date - dateOfFirstFailedLogin.date
     }
 
