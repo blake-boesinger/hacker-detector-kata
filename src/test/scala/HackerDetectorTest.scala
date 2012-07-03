@@ -1,6 +1,7 @@
 package com.detector
 
 import org.junit._
+import org.junit.Assert._
 
 
 
@@ -15,19 +16,19 @@ class HackerDetectorTest {
 
   @Test
   def successfulLoginReturnsNull {
-    org.junit.Assert.assertEquals(null, detector.parseLine("80.238.9.179,133612952,SIGNIN_SUCCESS,Dave.Branning"))
+    assertEquals(null, detector.parseLine("80.238.9.179,133612952,SIGNIN_SUCCESS,Dave.Branning"))
 
   }
 
 
   @Test
   def manySuccessfulLoginsWithinLessThanFiveMinutesReturnsNull {
-    org.junit.Assert.assertEquals(null, detector.parseLine("80.238.9.179,133612952,SIGNIN_SUCCESS,Dave.Branning"))
-    org.junit.Assert.assertEquals(null, detector.parseLine("80.238.9.179,133612953,SIGNIN_SUCCESS,Dave.Branning"))
-    org.junit.Assert.assertEquals(null, detector.parseLine("80.238.9.179,133612954,SIGNIN_SUCCESS,Dave.Branning"))
-    org.junit.Assert.assertEquals(null, detector.parseLine("80.238.9.179,133612955,SIGNIN_SUCCESS,Dave.Branning"))
-    org.junit.Assert.assertEquals(null, detector.parseLine("80.238.9.179,133612956,SIGNIN_SUCCESS,Dave.Branning"))
-    org.junit.Assert.assertEquals(null, detector.parseLine("80.238.9.179,133612957,SIGNIN_SUCCESS,Dave.Branning"))
+    assertEquals(null, detector.parseLine("80.238.9.179,133612952,SIGNIN_SUCCESS,Dave.Branning"))
+    assertEquals(null, detector.parseLine("80.238.9.179,133612953,SIGNIN_SUCCESS,Dave.Branning"))
+    assertEquals(null, detector.parseLine("80.238.9.179,133612954,SIGNIN_SUCCESS,Dave.Branning"))
+    assertEquals(null, detector.parseLine("80.238.9.179,133612955,SIGNIN_SUCCESS,Dave.Branning"))
+    assertEquals(null, detector.parseLine("80.238.9.179,133612956,SIGNIN_SUCCESS,Dave.Branning"))
+    assertEquals(null, detector.parseLine("80.238.9.179,133612957,SIGNIN_SUCCESS,Dave.Branning"))
   }
 
 
@@ -37,8 +38,8 @@ class HackerDetectorTest {
     detector.parseLine("80.238.9.179,133612949,SIGNIN_FAILURE,Dave.Branning")
     detector.parseLine("80.238.9.179,133612950,SIGNIN_FAILURE,Dave.Branning")
     detector.parseLine("80.238.9.179,133612951,SIGNIN_FAILURE,Dave.Branning")
-    org.junit.Assert.assertEquals( "80.238.9.179", detector.parseLine("80.238.9.179,133612952,SIGNIN_FAILURE,Dave.Branning"))
-    org.junit.Assert.assertEquals( null, detector.parseLine("80.238.9.179,133612953,SIGNIN_FAILURE,Dave.Branning"))
+    assertEquals( "80.238.9.179", detector.parseLine("80.238.9.179,133612952,SIGNIN_FAILURE,Dave.Branning"))
+    assertEquals( null, detector.parseLine("80.238.9.179,133612953,SIGNIN_FAILURE,Dave.Branning"))
 
 
   }
@@ -49,7 +50,7 @@ class HackerDetectorTest {
     detector.parseLine("80.238.9.179,133612947,SIGNIN_FAILURE,Dave.Branning")
     detector.parseLine("80.238.9.179,133612948,SIGNIN_FAILURE,Dave.Branning")
     detector.parseLine("80.238.9.179,133612952,SIGNIN_FAILURE,Dave.Branning")
-    org.junit.Assert.assertEquals( null, detector.parseLine("80.238.9.179,133612953,SIGNIN_FAILURE,Dave.Branning"))
+    assertEquals( null, detector.parseLine("80.238.9.179,133612953,SIGNIN_FAILURE,Dave.Branning"))
   }
 
 
@@ -60,7 +61,7 @@ class HackerDetectorTest {
      detector.parseLine("80.238.9.179,133612948,SIGNIN_FAILURE,Dave.Branning")
      detector.parseLine("80.238.9.179,133612948,SIGNIN_FAILURE,Dave.Branning")
      detector.parseLine("80.238.9.179,133612952,SIGNIN_FAILURE,Dave.Branning")
-     org.junit.Assert.assertEquals(  null, detector.parseLine("80.238.9.179,133612953,SIGNIN_FAILURE,Dave.Branning"))
+     assertEquals(  null, detector.parseLine("80.238.9.179,133612953,SIGNIN_FAILURE,Dave.Branning"))
 
    }
 

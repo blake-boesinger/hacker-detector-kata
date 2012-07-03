@@ -1,6 +1,7 @@
 package com.detector
 
 import org.junit._
+import org.junit.Assert._
 
 
 class LineParserTest {
@@ -13,7 +14,7 @@ class LineParserTest {
 
     val parsed = parser.parseLine ("80.238.9.179,133612947,SIGNIN_SUCCESS,Dave.Branning")
 
-    org.junit.Assert.assertEquals( Line("80.238.9.179", 133612947, "SIGNIN_SUCCESS" , "Dave.Branning"  ) , parsed)
+    assertEquals( Line("80.238.9.179", 133612947, "SIGNIN_SUCCESS" , "Dave.Branning"  ) , parsed)
 
 
 
