@@ -1,9 +1,9 @@
 package com.detector
 
 
-class InMemoryHackerDetector(lineParser: LineParser, recorder: Recorder, hackerPolicy : HackerPolicy) extends HackerDetector {
+class InMemoryHackerDetector(lineParser: LineParser, recorder: LoginRecorder, hackerPolicy : HackerPolicy) extends HackerDetector {
 
-  //TODO encapsulate collections and use domain objects rather than strings
+  //TODO use domain objects rather than strings
 
 
 
