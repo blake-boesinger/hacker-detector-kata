@@ -1,6 +1,5 @@
 package com.detector
 
-import com.detector.HackerPolicy
 import org.junit._
 import org.junit.Assert._
 
