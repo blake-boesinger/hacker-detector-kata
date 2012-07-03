@@ -4,10 +4,10 @@ package com.detector
 class HackerPolicy {
 
   //     Strategy / Policy pattern
-  def isHacker(numberOfFailedLogins: Int, timeOfFirstFailedLogin: Date, timeOfCurrentLogin: Date): Boolean = {
+  def isHacker(numberOfFailedLogins: Int, dateOfFirstFailedLogin: Date, dateOfCurrentLogin: Date): Boolean = {
 
     def timeBetweenFirstAndCurrentLogin: Long = {
-      timeOfCurrentLogin.date - timeOfFirstFailedLogin.date
+      dateOfCurrentLogin.date - dateOfFirstFailedLogin.date
     }
 
     if (numberOfFailedLogins >= 5) {

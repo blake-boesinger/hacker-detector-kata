@@ -3,10 +3,6 @@ package com.detector
 
 class InMemoryHackerDetector(lineParser: LineParser, recorder: LoginRecorder, hackerPolicy : HackerPolicy) extends HackerDetector {
 
-  //TODO use domain objects rather than strings
-
-
-
 
   override def parseLine(line: String): String = {
 
@@ -30,8 +26,6 @@ class InMemoryHackerDetector(lineParser: LineParser, recorder: LoginRecorder, ha
 
 
       case _ => null
-
-        // instead of returning null, I usually prefer to use "Tell, don't ask", Null Object Pattern, or using an Option / Maybe
     }
 
 
