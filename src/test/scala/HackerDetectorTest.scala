@@ -7,7 +7,7 @@ import org.junit.Assert._
 
 class HackerDetectorTest {
 
-  var detector : HackerDetector= null
+  var detector : HackerDetector = _
 
   @Before
   def setup = {
